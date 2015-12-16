@@ -1,0 +1,54 @@
+﻿@model HashTagSearcher.Models.MapModel
+<head>
+    <title>Client Side Heat Map</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <script type="text/javascript" src="~/Data/norfolkcrimedata.js"></script>
+    <script type="text/javascript">
+        var map;
+        var heatmapLayer;
+
+        function GetMap() {
+
+            var rawData = @Html.Raw(Json.Encode(Model.Points));
+            var mapData = [];
+
+            for (var i = 0; i < rawData.length; i++) {
+                var parts = rawData[i].split(",");
+                mapData.push(new window.Microsoft.Maps.Location(parts[0], parts[1]));
+                console.log(parts[0] + " " + parts[1]);
+            }
+
+            map = new window.Microsoft.Maps.Map(document.getElementById("divMap"),
+            {
+                credentials: "AidxzvNB0-caoQwXp0yOdcK8fmx51FWNZBEFZZZ-Y12aztyKhjOE0d3JjYodgqb9",
+                center: new window.Microsoft.Maps.Location(41.98722963360002, -96.41796874999999),
+                mapTypeId: window.Microsoft.Maps.MapTypeId.road,
+                labelOverlay: window.Microsoft.Maps.LabelOverlay.hidden,
+                showMapTypeSelector: false,
+                showScalebar: false,
+                showDashboard: false,
+                disablePanning: true,
+                disableZooming: true,
+                enableClickableLogo: false,
+                enableSearchLogo: false,
+                zoom: 4
+            });
+
+            map.restrictZoom(4,4);
+
+
+            window.Microsoft.Maps.registerModule("HeatMapModule", "/Scripts/heatmap.js");
+            window.Microsoft.Maps.loadModule("HeatMapModule", {
+                callback: function() {
+                    heatmapLayer = new HeatMapLayer(map, mapData);
+
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="GetMap();">
+    <div id="divMap" style="height: 490px; position: relative;"></div><br />
+</body>

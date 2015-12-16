@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#NewsNest - Search Twitter Hashtags</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #00aced; border-color: transparent; text-align: center">
+    <h1 style="text-decoration: none;">#NewsNest</h1>
+    <!--<p>Twitter Hashtag Searcher</p>-->
+    <p/>
+</div>
+
+<div class="container body-content">
+    @RenderBody()
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", false)
+
+</body>
+</html>

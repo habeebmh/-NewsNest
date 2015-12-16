@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTagSearcher", "HashTagSearcher\HashTagSearcher.csproj", "{90E86D2C-F97E-4C9D-973D-2D39831BBFF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{19AFC038-22B7-4BDB-B38E-556CA237D3CD}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureVMPublishModule.psm1 = PublishScripts\AzureVMPublishModule.psm1
+		PublishScripts\Publish-WebApplicationVM.ps1 = PublishScripts\Publish-WebApplicationVM.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{CD2F3DFB-5A81-4226-9C9C-2E72F44D8BE9}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\HashTagSearcher-WAWS-dev.json = PublishScripts\Configurations\HashTagSearcher-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90E86D2C-F97E-4C9D-973D-2D39831BBFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E86D2C-F97E-4C9D-973D-2D39831BBFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E86D2C-F97E-4C9D-973D-2D39831BBFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E86D2C-F97E-4C9D-973D-2D39831BBFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD2F3DFB-5A81-4226-9C9C-2E72F44D8BE9} = {19AFC038-22B7-4BDB-B38E-556CA237D3CD}
+	EndGlobalSection
+EndGlobal

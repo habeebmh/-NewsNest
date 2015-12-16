@@ -1,0 +1,21 @@
+﻿@using System.Diagnostics
+@using Gapi.Search
+@{
+    var results = ViewBag.Results as SearchResult[];
+    Debug.Assert(results != null, "results != null");
+    foreach (var result in results)
+    {
+        <div>
+            <div>
+                <div>
+                    <h3>
+                        <a class="l _HId" href="@result.Url">@Html.Raw(result.Title)</a>
+                    </h3>
+                    <div>
+                        @Html.Raw(result.Content)&nbsp;...
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

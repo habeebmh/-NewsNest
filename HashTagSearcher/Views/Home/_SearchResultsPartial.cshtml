@@ -1,0 +1,60 @@
+﻿@using System.Diagnostics
+@using System.Text.RegularExpressions
+@using HashTagSearcher.Controllers
+@using TweetSharp
+<style>
+    .table-all {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .table-all.subs { padding: 15px; }
+</style>
+
+<table class="table-all">
+    <tr class="table-all subs">
+        <!--<th class="table-all subs">Loc</th>-->
+        <th class="table-all subs">Date</th>
+        <th class="table-all subs">Author</th>
+        <td class="table-all subs">
+            <strong>Tweet</strong>
+        </td>
+    </tr>
+    @{
+        var tweets = ViewBag.Tweets as IEnumerable<TwitterStatus>;
+
+        Debug.Assert(tweets != null, "tweets is null");
+        var twitterStatuses = tweets as TwitterStatus[] ?? tweets.ToArray();
+
+        foreach (var tweet in twitterStatuses)
+        {
+            var text = tweet.Text;
+            var color = "transparent";
+            var rgx = new Regex("[^a-zA-Z0-9-:()'<> ]");
+            text = rgx.Replace(text, "");
+
+            foreach (var word in text.Split(' '))
+            {
+                if (WordLists.BadWords.Contains(word.ToLower()))
+                {
+                    color = "#FFE5E5";
+                }
+                else if (WordLists.GoodWords.Contains(word.ToLower()))
+                {
+                    color = "#E0FDE0";
+                }
+            }
+
+            var firstCol = tweet.CreatedDate + (tweet.Place != null ? " from " + tweet.Place.Name : "");
+
+            <tr class="table-all subs" style="background-color: @color;">
+                <!--<td class="table-all subs" style="text-align: center;">@(tweet.Location != null || tweet.Place != null ? "*" : "")</td>-->
+                <td class="table-all subs">@firstCol</td>
+                <td class="table-all subs">@@@tweet.Author.ScreenName</td>
+                <td class="table-all subs">@tweet.Text</td>
+            </tr>
+        }
+    }
+
+
+</table>

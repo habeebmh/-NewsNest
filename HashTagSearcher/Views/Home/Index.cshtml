@@ -1,0 +1,70 @@
+﻿@model HashTagSearcher.Models.IndexModel
+@using Tweetinvi.Core.Extensions
+@{
+    ViewBag.Title = "Search";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/IndexStyles.css">
+<script>
+    function random() {
+        var trending =  @Html.Raw(Json.Encode(Model.TrendingTags));
+        var num = Math.floor((Math.random() * trending.length) + 1);
+        var tag = trending[num];
+
+        document.getElementById('hashtag').value = tag;
+        @IsPost = true;
+        @Model.Query = tag;
+    }
+</script>
+
+<div align="center">
+    <h4 style="color: transparent;">-</h4>
+    <form method="post">
+        <p align="center">Search for any <a target="_blank" href="http://twitter.com/">Twitter</a> Hashtag</p>
+        <fieldset class="field">
+            <div>
+                <input class="searchbox" style="width: 100%" type="text" name="hashtag" id="hashtag" value="@Model.Query" />
+                <input type="submit" value="Search" class="submit" id="search"/>
+                <!--<input type="submit" value="Random" class="submit" onclick="random" />-->
+            </div>
+        </fieldset>
+    </form>
+</div>
+<p/>
+<table>
+    <tr>
+        @if (IsPost)
+        {
+            var value = Request.Form["hashtag"];
+            value = value.Replace("#", "");
+
+            ViewBag.Query = value;
+
+            if (!value.IsNullOrEmpty())
+            {
+@*                <td style="vertical-align: top; width: 40%">*@
+@*                    <h3>News for #@value</h3>*@
+@*                    @{*@
+@*                        Html.RenderAction("_NewsPartial", new {query = value});*@
+@*                    }*@
+@*                </td>*@
+                <td style="vertical-align: top; width: 60%;">
+                    <h3>Map for #@value</h3>
+                    @{
+                        Html.RenderAction("_MapPartial", new {query = value});
+                    }
+                    <p/>
+                    <h3>Tweets including #@value</h3>
+                    @{
+                        Html.RenderAction("_SearchResultsPartial", new {query = value});
+                    }
+                </td>
+            }
+        }
+    </tr>
+</table>
+<p/>
+<footer style="text-align: center">
+    <hr/><br/>
+    <b>Created by:</b><br/> Habeeb Hooshmand, Alex Skwarczynski, Jenna Lusk, and Brandon Mannings
+</footer>
