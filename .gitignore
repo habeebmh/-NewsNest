@@ -281,3 +281,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+HashTagSearcher/Scripts/jquery.validate-vsdoc.js
